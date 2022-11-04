@@ -1,0 +1,430 @@
+.:MARIO ORTIZ, DANIEL ALZATE, JUAN ROBLEDO:.
+
+.:VALIDACION:.
+db.createCollection("usuarios",
+{
+validator: {$and:
+[
+{"Nombre":{$type: "string"}},
+{"tipodocumento":{$in: ["cc","pasaporte","ce"]}},
+{"documento":{$type: "string"}},
+{"genero":{$in: ["Hombre","Mujer"]}},
+{"FechaNacimiento":{$type: "date"}},
+{"edad":{$type: "string"}},
+{"FechaAfiliacion":{$type: "date"}},
+{"tipo":{$in: ["cotizante","beneficiario"]}},
+{"llamado":{$sin: ["si","no"]}},
+{"vacunado":{$sin: ["si","no"]}},
+{"invitacion":{$sin: ["Correo","Llamada Telefonica"]}},
+{"HoraFechaInvitacion":{$type: "date"}},
+{"Duracion":{$type: "string"}},
+{"Dosis1":{$sin: ["Janssen","Pfizer","AstraZeneca","Sinovac","Moderna"]}},
+{"FechaDosis1":{$type: "date"}},
+{"EfecSecundLocalD1":{$type: "string"}},
+{"EfecSecundGeneralD1":{$sin: ["dolor de cabeza (cefalea)","dolor en las articulaciones (astralgia)","dolor muscular (mialgia)","fatiga","resfriado","fiebre(pirexia)","malestar general"]}},
+{"Dosis2":{$sin: ["Janssen","Pfizer","AstraZeneca","Sinovac","Moderna"]}},
+{"FechaDosis2":{$type: "date"}},
+{"EfecSecundLocalD2":{$type: "string"}},
+{"EfecSecundGeneralD2":{$sin: ["dolor de cabeza (cefalea)","dolor en las articulaciones (astralgia)","dolor muscular (mialgia)","fatiga","resfriado","fiebre(pirexia)","malestar general"]}},
+{"Dosis3":{$sin: ["Janssen","Pfizer","AstraZeneca","Sinovac","Moderna"]}},
+{"FechaDosis3":{$type: "date"}},
+{"EfecSecundLocalD3":{$type: "string"}},
+{"EfecSecundGeneralD3":{$sin: ["dolor de cabeza (cefalea)","dolor en las articulaciones (astralgia)","dolor muscular (mialgia)","fatiga","resfriado","fiebre(pirexia)","malestar general"]
+}}
+]
+}
+})
+
+
+
+.:INSERTS:.
+-----------
+db.usuarios.insertOne({nombre:"Juan Perez",tipodocumento:"cc",documento:"123456",genero:"Hombre",FechaNacimiento:"2001-06-06",edad:"20",FechaAfiliacion:"20010-03-04",tipo:"beneficiario",llamado:"si",vacunado:"si",invitacion:"Correo",HoraFechaInvitacion:"2021-02-03T10:00:00",Dosis1:"Pfizer",FechaDosis1:"2021-05-06T15:30:00",Dosis2:"Pfizer",FechaDosis2:"2021-07-03T10:15:08",Dosis3:"Pfizer",FechaDosis3:"2021-10-10T17:10:01"})
+
+db.usuarios.insertOne({nombre:"Pedro Perez",tipodocumento:"pasaporte",documento:"AFT256",genero:"Hombre",FechaNacimiento:"2002-07-16",edad:"19",FechaAfiliacion:"2011-02-14",tipo:"cotizante",llamado:"si",vacunado:"si",invitacion:"Llamada Telefonica",HoraFechaInvitacion:"2021-01-13T16:00:00",Duracion:"5 minutos",Dosis1:"Pfizer",FechaDosis1:"2021-08-02T8:00:00",EfecSecundLocal1:"enrojecimiento",EfecSecundGeneralD1:"dolor de cabeza (cefalea)"})
+
+db.usuarios.insertOne({nombre:"Juanita Perez",tipodocumento:"ce",documento:"95163",genero:"Mujer",FechaNacimiento:"2000-01-03",edad:"21",FechaAfiliacion:"2009-09-14",tipo:"beneficiario",llamado:"si",vacunado:"si",invitacion:"Correo",HoraFechaInvitacion:"2020-06-07T08:00:15",Dosis1:"Moderna",FechaDosis1:"2020-05-06T10:30:00",EfecSecundLocalD1:"inflamación",EfecSecundGeneralD1:"resfriado",Dosis2:"Sinovac",FechaDosis2:"2021-01-01T13:15:13",EfecSecundLocalD2:"linfadenopatía",EfecSecundGeneralD2:"dolor muscular (mialgia)",Dosis3:"Pfizer",FechaDosis3:"2020-10-17",EfecSecundGeneralD3:"dolor en las articulaciones (astralgia)"})
+
+db.usuarios.insertOne({nombre:"Juan Cuadrado",tipodocumento:"cc",documento:"60923",genero:"Hombre",FechaNacimiento:"1950-07-13",edad:"71",FechaAfiliacion:"2000-01-02",tipo:"cotizante",llamado:"si",vacunado:"si",invitacion:"Llamada Telefonica",HoraFechaInvitacion:"2020-04-14T05:00:00",Duracion:"20 minutos",Dosis1:"Moderna",FechaDosis1:"2020-06-08T10:30:00",EfecSecundLocalD1:"inflamación",EfecSecundGeneralD1:"dolor en las articulaciones (astralgia)",Dosis2:"Moderna",FechaDosis2:"2020-08-17T13:15:13",EfecSecundLocalD2:"Dolor",Dosis3:"Moderna",FechaDosis3:"2021-09-17"})
+
+db.usuarios.insertOne({nombre:"Ignacio Perez",tipodocumento:"ce",documento:"987654",genero:"Hombre",FechaNacimiento:"2010-11-13",edad:"10",FechaAfiliacion:"2012-01-02",tipo:"beneficiario",llamado:"no",vacunado:"no"})
+
+db.usuarios.insertOne({nombre:"Lisa Simpson",tipodocumento:"PASAPORTE",documento:"POJ046",genero:"Mujer",FechaNacimiento:"2005-03-11",edad:"16",FechaAfiliacion:"2008-12-02",tipo:"beneficiario",llamado:"si",vacunado:"si",invitacion:"Correo",HoraFechaInvitacion:"2021-07-19T12:00:00",Duracion:"4 minutos",Dosis1:"AstraZeneca"})
+
+db.usuarios.insertOne({nombre:"Bart Simpson",tipodocumento:"PASAPORTE",documento:"HJL306",genero:"Hombre",FechaNacimiento:"2003-10-7",edad:"18",FechaAfiliacion:"2007-01-15",tipo:"beneficiario",llamado:"si",vacunado:"si",invitacion:"Correo",HoraFechaInvitacion:"2021-10-10T15:00:00",Dosis1:"AstraZeneca",FechaDosis1:"2021-11-08T12:30:00",EfecSecundLocalD1:"inflamación",Dosis2:"AstraZeneca",FechaDosis2:"2021-11-17T15:00:13",EfecSecundGeneralD2:"dolor muscular (mialgia)"})
+
+db.usuarios.insertOne({nombre:"Antonio Vargaz",tipodocumento:"cc",documento:"100034",genero:"Hombre",FechaNacimiento:"1941-11-03",edad:"80",FechaAfiliacion:"1998-09-14",tipo:"cotizante",llamado:"si",vacunado:"si",invitacion:"Llamada Telefonica",HoraFechaInvitacion:"2020-04-07T09:35:15",Duracion:"1 hora",Dosis1:"Janssen",FechaDosis1:"2020-05-06T10:30:00",EfecSecundLocalD1:"enrojecimiento",EfecSecundGeneralD1:"fiebre(pirexia)",Dosis2:"Sinovac",FechaDosis2:"2020-11-12T16:15:13",EfecSecundLocalD2:"Dolor",EfecSecundGeneralD2:"malestar general",Dosis3:"Janssen",FechaDosis3:"2021-09-17",EfecSecundLocalD3:"Dolor",EfecSecundGeneralD3:"dolor en las articulaciones (astralgia)"})
+
+db.usuarios.insertOne({nombre:"Margarita Velez",tipodocumento:"cc",documento:"20456",genero:"Mujer",FechaNacimiento:"2019-02-02",edad:"2",FechaAfiliacion:"2020-12-07",tipo:"beneficiario",llamado:"no",vacunado:"no"})
+
+db.usuarios.insertOne({nombre:"Alejandro Martinez",tipodocumento:"cc",documento:"1033911",genero:"Hombre",FechaNacimiento:"2001-06-06",edad:"20",FechaAfiliacion:"2010-05-14",tipo:"beneficiario",llamado:"si",vacunado:"si",invitacion:"Correo",HoraFechaInvitacion:"2020-04-07T19:25:00",Dosis1:"AstraZeneca",FechaDosis1:"2021-06-08T11:15:02",EfecSecundLocalD1:"Dolor",Dosis2:"AstraZeneca",FechaDosis2:"2021-10-12T16:15:16"})
+
+db.usuarios.insertOne({nombre:"Maria Velasquez",tipodocumento:"cc",documento:"7891230",genero:"Mujer",FechaNacimiento:"1970-02-16",edad:"51",FechaAfiliacion:"2001-10-11",tipo:"cotizante",llamado:"si",vacunado:"no",invitacion:"Llamada Telefonica",HoraFechaInvitacion:"2021-10-07T09:35:00",Duracion:"2 horas"})
+
+db.usuarios.insertOne({nombre:"Alejandro Velasquez",tipodocumento:"cc",documento:"9091230",genero:"Hombre",FechaNacimiento:"1968-02-16",edad:"53",FechaAfiliacion:"2001-10-11",tipo:"cotizante",llamado:"si",vacunado:"no",invitacion:"Llamada Telefonica",HoraFechaInvitacion:"2021-11-13T09:00:14",Duracion:"30 minutos"})
+
+db.usuarios.insertOne({nombre:"Ana Mendez",tipodocumento:"ce",documento:"78640",genero:"mujer",FechaNacimiento:"1921-06-15",edad:"100",FechaAfiliacion:"1995-01-02",tipo:"cotizante",llamado:"si",vacunado:"si",invitacion:"Llamada Telefonica",HoraFechaInvitacion:"2020-05-16T19:00:00",Duracion:"5 horas",Dosis1:"Sinovac",FechaDosis1:"2020-05-10T11:30:00",EfecSecundGeneralD1:"malestar general",Dosis2:"Moderna",FechaDosis2:"2021-08-17T14:15:03",EfecSecundLocalD2:"Dolor",Dosis3:"Janssen",FechaDosis3:"2021-09-19",EfecSecundGeneralD3:"dolor muscular (mialgia)"})
+
+db.usuarios.insertOne({nombre:"Francisco de la Rosa",tipodocumento:"PASAPORTE",documento:"YOU981",genero:"Hombre",FechaNacimiento:"2020-01-02",edad:"1",FechaAfiliacion:"2020-11-11",tipo:"beneficiario",llamado:"no",vacunado:"no"})
+
+db.usuarios.insertOne({nombre:"Fernando Ortiz",tipodocumento:"cc",documento:"140904",genero:"Hombre",FechaNacimiento:"1955-11-03",edad:"66",FechaAfiliacion:"2010-10-18",tipo:"cotizante",llamado:"si",vacunado:"si",invitacion:"Correo",HoraFechaInvitacion:"2020-04-07T12:30:01",Dosis1:"Pfizer",FechaDosis1:"2020-05-12T18:15:00",EfecSecundLocalD1:"Dolor",EfecSecundGeneralD1:"malestar genera",Dosis2:"Sinovac",FechaDosis2:"2021-05-12T16:00:13",EfecSecundLocalD2:"Dolor",EfecSecundGeneralD2:"malestar general",Dosis3:"Janssen",FechaDosis3:"2021-09-20",EfecSecundLocalD3:"Dolor",EfecSecundGeneralD3:"malestar general"})
+
+db.usuarios.insertOne({nombre:"Ana Ortiz",tipodocumento:"cc",documento:"702230",genero:"Mujer",FechaNacimiento:"2002-10-14",edad:"19",FechaAfiliacion:"2008-03-05",tipo:"beneficiario",llamado:"si",vacunado:"si",invitacion:"Correo",HoraFechaInvitacion:"2020-02-17T09:25:00",Dosis1:"AstraZeneca",FechaDosis1:"2020-05-12T18:15:00",EfecSecundLocalD1:"linfadenopatía",Dosis2:"AstraZeneca",FechaDosis2:"2021-06-12T12:00:00"})
+
+db.usuarios.insertOne({nombre:"Sebastian Vargas",tipodocumento:"ce",documento:"784123",genero:"Hombre",FechaNacimiento:"2001-07-14",edad:"20",FechaAfiliacion:"2013-10-05",tipo:"beneficiario",llamado:"si",vacunado:"si",invitacion:"Correo",HoraFechaInvitacion:"2021-01-14T19:00:00",Dosis1:"AstraZeneca",FechaDosis1:"2021-05-12T18:15:00",EfecSecundLocalD1:"linfadenopatía",EfecSecundGeneralD1:"malestar general",Dosis2:"AstraZeneca",FechaDosis2:"2021-10-15T15:19:02",EfecSecundLocalD2:"Dolor"})
+
+db.usuarios.insertOne({nombre:"Ana de la Rosa",tipodocumento:"PASAPORTE",documento:"UOY189",genero:"Mujer",FechaNacimiento:"2017-01-12",edad:"4",FechaAfiliacion:"2019-12-01",tipo:"beneficiario",llamado:"no",vacunado:"no"})
+
+db.usuarios.insertOne({nombre:"Jairo Hernandez",tipodocumento:"cc",documento:"336699",genero:"Hombre",FechaNacimiento:"1955-01-12",edad:"66",FechaAfiliacion:"2007-12-08",tipo:"cotizante",llamado:"si",vacunado:"no",invitacion:"Correo",HoraFechaInvitacion:"2020-02-15T20:30:30"})
+
+db.usuarios.insertOne({nombre:"Ana Martinez",tipodocumento:"PASAPORTE",documento:"ABC129",genero:"Mujer",FechaNacimiento:"1998-03-10",edad:"23",FechaAfiliacion:"2007-12-08",tipo:"cotizante",llamado:"si",vacunado:"si",invitacion:"Correo",HoraFechaInvitacion:"2021-01-20T9:30:04",Dosis1:"AstraZeneca",FechaDosis1:"2021-05-15T16:00:30"})
+
+
+
+.:PUNTO1:.
+//FUNCIONAL
+"Pfizer: " + (db.usuarios.find({Dosis1:/^Pfizer/}).count() + db.usuarios.find({Dosis2:/^Pfizer/}).count() + db.usuarios.find({Dosis3:/^Pfizer/}).count())
+
+"Astrazeneca: " + (db.usuarios.find({Dosis1:/^AstraZeneca/}).count() + db.usuarios.find({Dosis2:/^AstraZeneca/}).count() + db.usuarios.find({Dosis3:/^AstraZeneca/}).count())
+
+"Moderna: " + (db.usuarios.find({Dosis1:/^Moderna/}).count() + db.usuarios.find({Dosis2:/^Moderna/}).count() + db.usuarios.find({Dosis3:/^Moderna/}).count())
+
+"Sinovac: " + (db.usuarios.find({Dosis1:/^Sinovac/}).count() + db.usuarios.find({Dosis2:/^Sinovac/}).count() + db.usuarios.find({Dosis3:/^Sinovac/}).count())
+
+
+//INTENTO1
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Pfizer: {$sum:{$sum: "$Dosis1:/^Pfizer/", $sum: "$Dosis2:/^Pfizer/", $sum: "$Dosis3:/^Pfizer/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Astrazeneca: {$sum:{$sum: "$Dosis1:/^AstraZeneca/", $sum: "$Dosis2:/^AstraZeneca/", $sum: "$Dosis3:/^AstraZeneca/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Moderna: {$sum:{$sum: "$Dosis1:/^Moderna/", $sum: "$Dosis2:/^Moderna/", $sum: "$Dosis3:/^Moderna/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Sinovac: {$sum:{$sum: "$Dosis1:/^Sinovac/", $sum: "$Dosis2:/^Sinovac/", $sum: "$Dosis3:/^Sinovac/"}}}}}
+]
+).pretty()
+
+
+//INTENTO2
+Pfizer=  (db.usuarios.find({Dosis1:/^Pfizer/}).count() + db.usuarios.find({Dosis2:/^Pfizer/}).count() + db.usuarios.find({Dosis3:/^Pfizer/}).count())
+
+Astrazeneca=(db.usuarios.find({Dosis1:/^AstraZeneca/}).count() + db.usuarios.find({Dosis2:/^AstraZeneca/}).count() + db.usuarios.find({Dosis3:/^AstraZeneca/}).count())
+
+Moderna= (db.usuarios.find({Dosis1:/^Moderna/}).count() + db.usuarios.find({Dosis2:/^Moderna/}).count() + db.usuarios.find({Dosis3:/^Moderna/}).count())
+
+Sinovac = (db.usuarios.find({Dosis1:/^Sinovac/}).count() + db.usuarios.find({Dosis2:/^Sinovac/}).count() + db.usuarios.find({Dosis3:/^Sinovac/}).count())
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Pfizer: {$sum:"$Pfizer},Astrazeneca: {$sum:"$Astrazeneca},Moderna: {$sum:"$Moderna},Sinovac: {$sum:"$Sinovac}}}}
+]
+).pretty()
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Pfizer: {$sum:"$Pfizer"},Astrazeneca: {$sum:"$Astrazeneca"},Moderna: {$sum:"$Moderna"},Sinovac: {$sum:"$Sinovac"}}}}
+]
+).pretty()
+Pfizer=  (db.usuarios.find({Dosis1:/^Pfizer/}).count() + db.usuarios.find({Dosis2:/^Pfizer/}).count() + db.usuarios.find({Dosis3:/^Pfizer/}).count())
+
+Astrazeneca=(db.usuarios.find({Dosis1:/^AstraZeneca/}).count() + db.usuarios.find({Dosis2:/^AstraZeneca/}).count() + db.usuarios.find({Dosis3:/^AstraZeneca/}).count())
+
+Moderna= (db.usuarios.find({Dosis1:/^Moderna/}).count() + db.usuarios.find({Dosis2:/^Moderna/}).count() + db.usuarios.find({Dosis3:/^Moderna/}).count())
+
+Sinovac = (db.usuarios.find({Dosis1:/^Sinovac/}).count() + db.usuarios.find({Dosis2:/^Sinovac/}).count() + db.usuarios.find({Dosis3:/^Sinovac/}).count())
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Pfizer: {$sum:"$Pfizer"},Astrazeneca: {$sum:"$Astrazeneca"},Moderna: {$sum:"$Moderna"},Sinovac: {$sum:"$Sinovac"}}}}
+]
+).pretty()
+
+
+
+.:PUNTO2:.
+db.usuarios.aggregate(
+[
+{$match: {vacunado:{$in: ["si"]}}},
+{$group: {_id:{TipoDocumento:"$tipodocumento",documento:"$documento",NombreCompleto:"$nombre",edad:"$edad",Vacuna:"$Dosis1",Vacuna2:"$Dosis2",Vacuna3:"$Dosis3"}}}
+]
+).pretty()
+
+
+
+.:PUNTO3:.
+db.usuarios.aggregate(
+[
+{$match: {Dosis1:{$in: [null]} }},
+{$group: {_id:{nombre:"$nombre",edad:"$edad",llamado:"$llamado"}}}
+]
+)
+
+
+
+.:PUNTO4:.
+//FUNCIONAL
+//TOTAL EFECTO SECUNDARIO
+"Dolor de cabeza (Cefalea): " + (db.usuarios.find({EfecSecundGeneralD1:/^dolor de cabeza (cefalea)/}).count() + db.usuarios.find({EfecSecundGeneralD2:/^dolor de cabeza (cefalea)/}).count() + db.usuarios.find({EfecSecundGeneralD3:/^dolor de cabeza (cefalea)/}).count())
+
+"Dolor en las articulaciones (Astralegia): " + (db.usuarios.find({EfecSecundGeneralD1:/^dolor en las articulaciones (astralgia)/}).count() + db.usuarios.find({EfecSecundGeneralD2:/^dolor en las articulaciones (astralgia)/}).count() + db.usuarios.find({EfecSecundGeneralD3:/^dolor en las articulaciones (astralgia)/}).count())
+
+"Dolor muscular (Mialgia): " + (db.usuarios.find({EfecSecundGeneralD1:/^dolor muscular (mialgia)/}).count() + db.usuarios.find({EfecSecundGeneralD2:/^dolor muscular (mialgia)/}).count() + db.usuarios.find({EfecSecundGeneralD3:/^dolor muscular (mialgia)/}).count())
+
+"Fatiga: " + (db.usuarios.find({EfecSecundGeneralD1:/^fatiga/}).count() + db.usuarios.find({EfecSecundGeneralD2:/^fatiga/}).count() + db.usuarios.find({EfecSecundGeneralD3:/^fatiga/}).count())
+
+"Resfriado: " + (db.usuarios.find({EfecSecundGeneralD1:/^resfriado/}).count() + db.usuarios.find({EfecSecundGeneralD2:/^resfriado/}).count() + db.usuarios.find({EfecSecundGeneralD3:/^resfriado/}).count())
+
+"Fiebre (Pirexia): " + (db.usuarios.find({EfecSecundGeneralD1:/^fiebre(pirexia)/}).count() + db.usuarios.find({EfecSecundGeneralD2:/^fiebre(pirexia)/}).count() + db.usuarios.find({EfecSecundGeneralD3:/^fiebre(pirexia)/}).count())
+
+"Malestar general: " + (db.usuarios.find({EfecSecundGeneralD1:/^malestar general/}).count() + db.usuarios.find({EfecSecundGeneralD2:/^malestar general/}).count() + db.usuarios.find({EfecSecundGeneralD3:/^malestar general/}).count())
+
+//PORCENTAJE EFECTO SECUNDARIO
+"Dolor de cabeza (Cefalea): " + (((db.usuarios.find({EfecSecundGeneralD1:/^dolor de cabeza (cefalea)/}).count() + db.usuarios.find({EfecSecundGeneralD2:/^dolor de cabeza (cefalea)/}).count() + db.usuarios.find({EfecSecundGeneralD3:/^dolor de cabeza (cefalea)/}).count())/20)*100) + "%"
+
+"Dolor en las articulaciones (Astralegia): " + (((db.usuarios.find({EfecSecundGeneralD1:/^dolor en las articulaciones (astralgia)/}).count() + db.usuarios.find({EfecSecundGeneralD2:/^dolor en las articulaciones (astralgia)/}).count() + db.usuarios.find({EfecSecundGeneralD3:/^dolor en las articulaciones (astralgia)/}).count())/20)*100) + "%"
+
+"Dolor muscular (Mialgia): " + (((db.usuarios.find({EfecSecundGeneralD1:/^dolor muscular (mialgia)/}).count() + db.usuarios.find({EfecSecundGeneralD2:/^dolor muscular (mialgia)/}).count() + db.usuarios.find({EfecSecundGeneralD3:/^dolor muscular (mialgia)/}).count())/20)*100) + "%"
+
+"Fatiga: " + (((db.usuarios.find({EfecSecundGeneralD1:/^fatiga/}).count() + db.usuarios.find({EfecSecundGeneralD2:/^fatiga/}).count() + db.usuarios.find({EfecSecundGeneralD3:/^fatiga/}).count())/20)*100) + "%"
+
+"Resfriado: " + (((db.usuarios.find({EfecSecundGeneralD1:/^resfriado/}).count() + db.usuarios.find({EfecSecundGeneralD2:/^resfriado/}).count() + db.usuarios.find({EfecSecundGeneralD3:/^resfriado/}).count())/20)*100) + "%"
+
+"Fiebre (Pirexia): " + (((db.usuarios.find({EfecSecundGeneralD1:/^fiebre(pirexia)/}).count() + db.usuarios.find({EfecSecundGeneralD2:/^fiebre(pirexia)/}).count() + db.usuarios.find({EfecSecundGeneralD3:/^fiebre(pirexia)/}).count())/20)*100) + "%"
+
+"Malestar general: " + (((db.usuarios.find({EfecSecundGeneralD1:/^malestar general/}).count() + db.usuarios.find({EfecSecundGeneralD2:/^malestar general/}).count() + db.usuarios.find({EfecSecundGeneralD3:/^malestar general/}).count())/20)*100) + "%"
+
+//INTENTO
+//HOMBRES
+//PARA CADA EFECTO SECUNDARIO
+db.usuarios.aggregate(
+[
+{$match: {genero:{$in: ["Hombre"]}}},
+{$group: {_id:{Dolor de cabeza: {$sum:{$sum: "$EfecSecundGeneralD1:/^dolor de cabeza (cefalea)/", $sum: "$EfecSecundGeneralD2:/^dolor de cabeza (cefalea)/", $sum: "$EfecSecundGeneralD3:/^dolor de cabeza (cefalea)/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {genero:{$in: ["Hombre"]}}},
+{$group: {_id:{Dolor en las articulaciones: {$sum:{$sum: "$EfecSecundGeneralD1:/^dolor en las articulaciones (astralgia)/", $sum: "$EfecSecundGeneralD2:/^dolor en las articulaciones (astralgia)/", $sum: "$EfecSecundGeneralD3:/^dolor en las articulaciones (astralgia)/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {genero:{$in: ["Hombre"]}}},
+{$group: {_id:{Dolor muscular: {$sum:{$sum: "$EfecSecundGeneralD1:/^dolor muscular (mialgia)/", $sum: "$EfecSecundGeneralD2:/^dolor muscular (mialgia)/", $sum: "$EfecSecundGeneralD3:/^dolor muscular (mialgia)/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {genero:{$in: ["Hombre"]}}},
+{$group: {_id:{Fatiga: {$sum:{$sum: "$EfecSecundGeneralD1:/^fatiga/", $sum: "$EfecSecundGeneralD2:/^fatiga/", $sum: "$EfecSecundGeneralD3:/^fatiga/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {genero:{$in: ["Hombre"]}}},
+{$group: {_id:{Resfriado: {$sum:{$sum: "$EfecSecundGeneralD1:/^resfriado/", $sum: "$EfecSecundGeneralD2:/^resfriado/", $sum: "$EfecSecundGeneralD3:/^resfriado/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {genero:{$in: ["Hombre"]}}},
+{$group: {_id:{Fiebre: {$sum:{$sum: "$EfecSecundGeneralD1:/^fiebre(pirexia)/", $sum: "$EfecSecundGeneralD2:/^fiebre(pirexia)/", $sum: "$EfecSecundGeneralD3:/^fiebre(pirexia)/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {genero:{$in: ["Hombre"]}}},
+{$group: {_id:{MalestarGeneral: {$sum:{$sum: "$EfecSecundGeneralD1:/^malestar general/", $sum: "$EfecSecundGeneralD2:/^malestar general/", $sum: "$EfecSecundGeneralD3:/^malestar general/"}}}}}
+]
+).pretty()
+
+//TOTAL HOMBRES
+db.usuarios.aggregate(
+[
+{$match: {genero:{$in: ["Hombre"]}}},
+{$group: {_id:{Total: {$sum:{$sum: "$EfecSecundGeneralD1", $sum: "$EfecSecundGeneralD2", $sum: "$EfecSecundGeneralD3"}}}}}
+]
+).pretty()
+
+//MUJERES
+//PARA CADA EFECTO SECUNDARIO
+db.usuarios.aggregate(
+[
+{$match: {genero:{$in: ["Mujer"]}}},
+{$group: {_id:{Dolor de cabeza: {$sum:{$sum: "$EfecSecundGeneralD1:/^dolor de cabeza (cefalea)/", $sum: "$EfecSecundGeneralD2:/^dolor de cabeza (cefalea)/", $sum: "$EfecSecundGeneralD3:/^dolor de cabeza (cefalea)/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {genero:{$in: ["Mujer"]}}},
+{$group: {_id:{Dolor en las articulaciones: {$sum:{$sum: "$EfecSecundGeneralD1:/^dolor en las articulaciones (astralgia)/", $sum: "$EfecSecundGeneralD2:/^dolor en las articulaciones (astralgia)/", $sum: "$EfecSecundGeneralD3:/^dolor en las articulaciones (astralgia)/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {genero:{$in: ["Mujer"]}}},
+{$group: {_id:{Dolor muscular: {$sum:{$sum: "$EfecSecundGeneralD1:/^dolor muscular (mialgia)/", $sum: "$EfecSecundGeneralD2:/^dolor muscular (mialgia)/", $sum: "$EfecSecundGeneralD3:/^dolor muscular (mialgia)/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {genero:{$in: ["Mujer"]}}},
+{$group: {_id:{Fatiga: {$sum:{$sum: "$EfecSecundGeneralD1:/^fatiga/", $sum: "$EfecSecundGeneralD2:/^fatiga/", $sum: "$EfecSecundGeneralD3:/^fatiga/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {genero:{$in: ["Mujer"]}}},
+{$group: {_id:{Resfriado: {$sum:{$sum: "$EfecSecundGeneralD1:/^resfriado/", $sum: "$EfecSecundGeneralD2:/^resfriado/", $sum: "$EfecSecundGeneralD3:/^resfriado/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {genero:{$in: ["Mujer"]}}},
+{$group: {_id:{Fiebre: {$sum:{$sum: "$EfecSecundGeneralD1:/^fiebre(pirexia)/", $sum: "$EfecSecundGeneralD2:/^fiebre(pirexia)/", $sum: "$EfecSecundGeneralD3:/^fiebre(pirexia)/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {genero:{$in: ["Mujer"]}}},
+{$group: {_id:{MalestarGeneral: {$sum:{$sum: "$EfecSecundGeneralD1:/^malestar general/", $sum: "$EfecSecundGeneralD2:/^malestar general/", $sum: "$EfecSecundGeneralD3:/^malestar general/"}}}}}
+]
+).pretty()
+
+//TOTAL MUJERES
+db.usuarios.aggregate(
+[
+{$match: {genero:{$in: ["Mujer"]}}},
+{$group: {_id:{Total: {$sum:{$sum: "$EfecSecundGeneralD1", $sum: "$EfecSecundGeneralD2", $sum: "$EfecSecundGeneralD3"}}}}}
+]
+).pretty()
+
+//TOTAL EFECTO SECUNDARIO
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Dolor de cabeza: {$sum:{$sum: "$EfecSecundGeneralD1:/^dolor de cabeza (cefalea)/", $sum: "$EfecSecundGeneralD2:/^dolor de cabeza (cefalea)/", $sum: "$EfecSecundGeneralD3:/^dolor de cabeza (cefalea)/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Dolor en las articulaciones: {$sum:{$sum: "$EfecSecundGeneralD1:/^dolor en las articulaciones (astralgia)/", $sum: "$EfecSecundGeneralD2:/^dolor en las articulaciones (astralgia)/", $sum: "$EfecSecundGeneralD3:/^dolor en las articulaciones (astralgia)/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Dolor muscular: {$sum:{$sum: "$EfecSecundGeneralD1:/^dolor muscular (mialgia)/", $sum: "$EfecSecundGeneralD2:/^dolor muscular (mialgia)/", $sum: "$EfecSecundGeneralD3:/^dolor muscular (mialgia)/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Fatiga: {$sum:{$sum: "$EfecSecundGeneralD1:/^fatiga/", $sum: "$EfecSecundGeneralD2:/^fatiga/", $sum: "$EfecSecundGeneralD3:/^fatiga/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Resfriado: {$sum:{$sum: "$EfecSecundGeneralD1:/^resfriado/", $sum: "$EfecSecundGeneralD2:/^resfriado/", $sum: "$EfecSecundGeneralD3:/^resfriado/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Fiebre: {$sum:{$sum: "$EfecSecundGeneralD1:/^fiebre(pirexia)/", $sum: "$EfecSecundGeneralD2:/^fiebre(pirexia)/", $sum: "$EfecSecundGeneralD3:/^fiebre(pirexia)/"}}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{MalestarGeneral: {$sum:{$sum: "$EfecSecundGeneralD1:/^malestar general/", $sum: "$EfecSecundGeneralD2:/^malestar general/", $sum: "$EfecSecundGeneralD3:/^malestar general/"}}}}}
+]
+).pretty()
+
+//PORCENTAJE EFECTO SECUNDARIO
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Dolor de cabeza: {$sum:{$sum: "$EfecSecundGeneralD1:/^dolor de cabeza (cefalea)/", $sum: "$EfecSecundGeneralD2:/^dolor de cabeza (cefalea)/", $sum: "$EfecSecundGeneralD3:/^dolor de cabeza (cefalea)/"}/20*100}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Dolor en las articulaciones: {$sum:{$sum: "$EfecSecundGeneralD1:/^dolor en las articulaciones (astralgia)/", $sum: "$EfecSecundGeneralD2:/^dolor en las articulaciones (astralgia)/", $sum: "$EfecSecundGeneralD3:/^dolor en las articulaciones (astralgia)/"}/20*100}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Dolor muscular: {$sum:{$sum: "$EfecSecundGeneralD1:/^dolor muscular (mialgia)/", $sum: "$EfecSecundGeneralD2:/^dolor muscular (mialgia)/", $sum: "$EfecSecundGeneralD3:/^dolor muscular (mialgia)/"}/20*100}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Fatiga: {$sum:{$sum: "$EfecSecundGeneralD1:/^fatiga/", $sum: "$EfecSecundGeneralD2:/^fatiga/", $sum: "$EfecSecundGeneralD3:/^fatiga/"}/20*100}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Resfriado: {$sum:{$sum: "$EfecSecundGeneralD1:/^resfriado/", $sum: "$EfecSecundGeneralD2:/^resfriado/", $sum: "$EfecSecundGeneralD3:/^resfriado/"}/20*100}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{Fiebre: {$sum:{$sum: "$EfecSecundGeneralD1:/^fiebre(pirexia)/", $sum: "$EfecSecundGeneralD2:/^fiebre(pirexia)/", $sum: "$EfecSecundGeneralD3:/^fiebre(pirexia)/"}/20*100}}}}
+]
+).pretty()
+
+db.usuarios.aggregate(
+[
+{$match: {}},
+{$group: {_id:{MalestarGeneral: {$sum:{$sum: "$EfecSecundGeneralD1:/^malestar general/", $sum: "$EfecSecundGeneralD2:/^malestar general/", $sum: "$EfecSecundGeneralD3:/^malestar general/"}/20*100}}}}
+]
+).pretty()
