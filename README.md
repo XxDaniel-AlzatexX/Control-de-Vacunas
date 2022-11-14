@@ -1,2 +1,2 @@
 # Control-de-Vacunas
-Proyecto realizado en el 2021. Este proyecto consiste en una base de datos no relacional (Mongo DB) en la cual se lleva todo el control de las vacunas de una población; Se analizan el tipo de dosis, la cantidad, efectos secundarios, etc. Además se realizan varias consultas sobre la base de datos.
+Project carried out in 2021. This project consists of a non-relational database (Mongo DB) in which all the control of the vaccines of a population is carried out; The type of dose, quantity, side effects, etc. are discussed. In addition, various queries are made against the database. Project already finished.
